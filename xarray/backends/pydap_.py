@@ -59,9 +59,9 @@ class PydapDataStore(AbstractDataStore):
     This store provides an alternative way to access OpenDAP datasets that may
     be useful if the netCDF4 library is not available.
     """
-    def __init__(self, url):
+    def __init__(self, url, session=None):
         import pydap.client
-        self.ds = pydap.client.open_url(url)
+        self.ds = pydap.client.open_url(url, session=session)
 
     def open_store_variable(self, var):
         data = indexing.LazilyIndexedArray(PydapArrayWrapper(var))
